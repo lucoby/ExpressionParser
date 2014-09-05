@@ -1,4 +1,4 @@
-def compute_expression(expr)
+def compute_pme_xpression(expr)
     exp_stack = []
     while expr.length > 0
         if expr =~ /^[\(\+\-]/
@@ -42,5 +42,5 @@ def evaluate(exp_stack)
     return exp_stack.push(eval_stack.pop)
 end
 
-compute_expression("(2+3)+((2+3-5)+3)")
+compute_pm_expression("(2+3)+((2+3-5)+3)")
 
