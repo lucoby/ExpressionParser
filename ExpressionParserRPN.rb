@@ -12,6 +12,7 @@ while expr.length > 0
     expr = parse[1]
 
     puts sub_expr
+    puts expr
     case sub_expr
     when /\^/
         
