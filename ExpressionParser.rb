@@ -12,20 +12,26 @@ def getNextParse(expr)
     return [parse, expr]
 end
 
-expr = "(12+3^2)*2-2*4"
+expr = "12+3^2*2-2*4"
 
 priority = ["^","*","+"]
 
 while expr.length > 0
-    puts getNextParse(expr)[0]
+    parse = getNextParse(expr)[0]
+    puts parse
     expr = getNextParse(expr)[1]
 
     case expr
     when /\^/
-
+        Node.new(parse)
+        
     when /[\*\/]/
-
+        Node.new(parse)
+        
     when /\+\-/
-
+        Node.new(parse)
+        
+    when /\d+/
+        Node.new(parse.to_i)
     end
 end
