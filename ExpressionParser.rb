@@ -15,23 +15,26 @@ end
 expr = "12+3^2*2-2*4"
 
 priority = ["^","*","+"]
+prev_op = nil
 
 while expr.length > 0
     parse = getNextParse(expr)[0]
     puts parse
     expr = getNextParse(expr)[1]
 
+    prev_op = nil
+    prev_num = nil
     case expr
     when /\^/
-        Node.new(parse)
-        
+        sub_exp = Node.new(parse)
+
     when /[\*\/]/
-        Node.new(parse)
+        sub_exp = Node.new(parse)
         
     when /\+\-/
-        Node.new(parse)
+        sub_exp = Node.new(parse)
         
     when /\d+/
-        Node.new(parse.to_i)
+        sub_exp = Node.new(parse.to_i)
     end
 end
