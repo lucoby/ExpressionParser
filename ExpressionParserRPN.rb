@@ -12,7 +12,19 @@ while expr.length > 0
     expr = parse[1]
 
     puts sub_expr
+    case sub_expr
+    when /\^/
+        
+    when /[\*]/
 
+    when /[\/]/
+        
+    when /\+/
+
+    when /[\-]/
+        
+    when /\d+/
     
+    end
 end
 
