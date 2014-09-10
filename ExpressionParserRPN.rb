@@ -1,10 +1,10 @@
 def getNextParse(expr)
-    parse = expr.match(/^[\+\-\^\*\/\s\,]|^\d+\.?\d*|^\.\d+/).to_s
+    parse = expr.match(/^[\+\-\^\*\/\s\,\&\|\!\%\~]|^\d+\.?\d*|^\.\d+|[\*\<\>]{2}/).to_s
     expr = expr[parse.length..-1]
     return [parse, expr]
 end
 
-expr = "14 2 + -.5 ^"
+expr = "12 ~"
 expr_stack = Array.new
 
 while expr.length > 0
@@ -16,7 +16,62 @@ while expr.length > 0
     case sub_expr
     when /\-?\d+\.?\d*/
         expr_stack.push(sub_expr.to_f)
+    when /\>{2}/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a.to_i >> b.to_i)
+        else
+            puts "ERROR"
+        end
+     when /\~/
+        a = expr_stack.pop
+        if !(a.nil?)
+            expr_stack.push(~a)
+        else
+            puts "ERROR"
+        end
+    when /\<{2}/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a.to_i << b.to_i)
+        else
+            puts "ERROR"
+        end
     when /\^/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a.to_i ^ b.to_i)
+        else
+            puts "ERROR"
+        end
+    when /\&/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a.to_i & b.to_i)
+        else
+            puts "ERROR"
+        end
+    when /\|/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a.to_i | b.to_i)
+        else
+            puts "ERROR"
+        end
+    when /\%/
+        b = expr_stack.pop
+        a = expr_stack.pop
+        if !(a.nil? || b.nil?)
+            expr_stack.push(a % b)
+        else
+            puts "ERROR"
+        end
+    when /\*{2}/
         b = expr_stack.pop
         a = expr_stack.pop
         if !(a.nil? || b.nil?)
