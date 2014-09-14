@@ -27,7 +27,7 @@ while expr.length > 0
     case expr
     when /\^/
         sub_exp = Node.new(parse)
-
+        if prev_op == nil || prev_num == nil
     when /[\*\/]/
         sub_exp = Node.new(parse)
         
