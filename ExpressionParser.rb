@@ -14,6 +14,8 @@ end
 
 expr = "12+3^2*2-2*4"
 
+exp_tree = nil
+
 priority = ["^","*","+"]
 prev_op = nil
 
@@ -28,6 +30,10 @@ while expr.length > 0
     when /\^/
         sub_exp = Node.new(parse)
         if prev_op == nil || prev_num == nil
+
+        elsif prev_op =~ /^[\+\-\^\*\/]/
+            prev_op.right = sub_exp
+        end
     when /[\*\/]/
         sub_exp = Node.new(parse)
         
