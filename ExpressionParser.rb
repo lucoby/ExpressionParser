@@ -31,13 +31,53 @@ while expr.length > 0
         sub_exp = Node.new(parse)
         if prev_num == nil
             puts "Error"
-        elsif prev_op =~ /^[\+\-\^\*\/]/
+        elsif prev_op =~ /^[\^\*\/\+\-]/
             prev_op.right = sub_exp
             sub_exp.left = prev_num
         end
     when /[\*\/]/
         sub_exp = Node.new(parse)
-        
+        if prev_num == nil
+            puts "Error"
+        elsif prev_op =~ /^[\^\*\/\+\-]/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
     when /\+\-/
         sub_exp = Node.new(parse)
         
